@@ -11,3 +11,5 @@ make flexdll
 make world.opt
 make flexlink.opt
 
+OCAML_FLEXLINK="flexdll/flexlink.opt" ./ocamlopt.opt -I stdlib hello.ml -o hello.exe
+file hello.exe
