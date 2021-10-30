@@ -17,11 +17,6 @@
 
 /* Win32-specific stuff */
 
-/* FILE_INFO_BY_HANDLE_CLASS and FILE_NAME_INFO are only available from Windows
-   Vista onwards */
-#undef _WIN32_WINNT
-#define _WIN32_WINNT 0x0600
-
 #define WIN32_LEAN_AND_MEAN
 #include <wtypes.h>
 #include <winbase.h>
@@ -955,6 +950,14 @@ void caml_restore_win32_terminal(void)
 /* Detect if a named pipe corresponds to a Cygwin/MSYS pty: see
    https://github.com/mirror/newlib-cygwin/blob/00e9bf2/winsup/cygwin/dtable.cc#L932
 */
+typedef struct _FILE_NAME_INFO {
+         DWORD FileNameLength;
+           WCHAR FileName[1];
+} FILE_NAME_INFO, *PFILE_NAME_INFO;
+typedef enum _FILE_INFO_BY_HANDLE_CLASS {
+  FileBasicInfo /* is zero? */,
+  FileStandardInfo,
+    FileNameInfo} FILE_INFO_BY_HANDLE_CLASS, *PFILE_INFO_BY_HANDLE_CLASS;
 typedef
 BOOL (WINAPI *tGetFileInformationByHandleEx)(HANDLE, FILE_INFO_BY_HANDLE_CLASS,
                                              LPVOID, DWORD);
