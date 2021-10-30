@@ -20,10 +20,8 @@
 PREFIX=C:/ocamlmgw
 
 ### Remove this to disable compiling ocamldebug
-WITH_DEBUGGER=ocamldebugger
 
 ### Remove this to disable compiling ocamldoc
-WITH_OCAMLDOC=ocamldoc
 
 ### Where to install the binaries
 BINDIR=$(PREFIX)/bin
